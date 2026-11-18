@@ -23,9 +23,14 @@ adb install -r app-debug.apk
 # Let it open YouTube TV from the background on wake
 adb shell appops set com.josh.overlayhome SYSTEM_ALERT_WINDOW allow
 
-# Google TV ignores the "default home" choice, so the stock launcher has to be disabled
+# Make Overlay Home the default, then disable the stock launchers (each should print "new state: disabled-user")
+adb shell cmd package set-home-activity com.josh.overlayhome/.OverlayHomeActivity
 adb shell pm disable-user --user 0 com.google.android.apps.tv.launcherx
 adb shell pm disable-user --user 0 com.google.android.tungsten.setupwraith
+adb shell pm disable-user --user 0 com.google.android.tvlauncher
+
+# Verify: should print com.josh.overlayhome/.OverlayHomeActivity
+adb shell cmd package resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.HOME
 
 adb reboot
 ```
@@ -34,6 +39,7 @@ adb reboot
 ```bash
 adb shell pm enable com.google.android.apps.tv.launcherx
 adb shell pm enable com.google.android.tungsten.setupwraith
+adb shell pm enable com.google.android.tvlauncher
 adb uninstall com.josh.overlayhome
 ```
 
