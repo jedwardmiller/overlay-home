@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Dark fade along the bottom so tiles are readable over live TV -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/overlay_gradient" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingStart="56dp"
+        android:paddingEnd="56dp"
+        android:paddingBottom="40dp">
+
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:format12Hour="h:mm"
+            android:format24Hour="HH:mm"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:layout_marginBottom="16dp" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp">
+
+            <LinearLayout
+                android:id="@+id/app_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+        </HorizontalScrollView>
+    </LinearLayout>
+</FrameLayout>
