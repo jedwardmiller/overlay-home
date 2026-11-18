@@ -19,7 +19,7 @@ import android.widget.TextView
  * from stays visible behind the row of app tiles.
  *
  * - Home pressed inside an app  -> overlay appears
- * - Home or Back on the overlay -> returns to the app you were in
+ * - Back on the overlay        -> returns to the app you were in
  * - First start after a reboot  -> opens Config.DEFAULT_APP
  */
 class OverlayHomeActivity : Activity() {
@@ -57,8 +57,10 @@ class OverlayHomeActivity : Activity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        // Home pressed while the overlay is already showing -> toggle it off.
-        if (visibleNow) returnToPreviousApp()
+        // Home always shows the overlay. (An earlier "Home again closes it" toggle
+        // misfired: Android restarts the activity before delivering the Home intent,
+        // so it looked already-visible and bounced straight back to the app.)
+        setIntent(intent)
     }
 
     @Deprecated("Deprecated in Java")
